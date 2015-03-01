@@ -1,0 +1,11 @@
+---
+- hosts: '{{ targethosts }}'
+  tasks:
+ 
+  - name: Copy the cleanup script
+    copy: src=/home/tclouds/devzone/docker-space/dockercleanup.sh dest=~/containers/
+              mode=0744
+  - name: run the clean task
+    shell: ~/containers/dockercleanup.sh
+    
+    

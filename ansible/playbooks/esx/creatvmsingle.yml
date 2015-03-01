@@ -1,0 +1,18 @@
+    
+---
+- hosts: "{{ targethosts }}"
+  gather_facts: false
+  vars:
+    vmcores: 1
+    vmmemory: 2048
+    vmnetwork_dev: vmxnet3
+    vmnetwork_name: VM Network
+    baseimage: tclouds-centos7-base
+    
+  tasks:
+  - raw: /vmfs/volumes/tclouds-vm-images/scripts/createvmfrombase.sh   "{{ targetvm }}" "{{ baseimage }}" "{{ vmcores }}" "{{ vmmemory }}" "{{ vmnetwork_dev }}" "{{ vmnetwork_name }}" 
+   
+  - raw: vim-cmd vmsvc/getallvms
+  
+  
+  

@@ -1,0 +1,25 @@
+---
+- hosts: '{{ targethosts }}'
+  tasks:
+  
+  - name: Copy the login script
+    copy: src=/home/tclouds/devzone/docker-space/dockerlogin.sh dest=~/containers/
+              mode=0744
+              
+  - name: run the login task
+    shell: ~/containers/dockerlogin.sh
+    
+  - name: run the copy task  
+    copy: src=/home/tclouds/devzone/docker-space/{{ image_name }}/startinstance.sh dest=~/containers/{{ image_name }}_startinstance.sh mode=0744
+  - name: run the start task  
+    shell: ~/containers/{{ image_name }}_startinstance.sh
+    
+  - name: Copy the cleanup script
+    copy: src=/home/tclouds/devzone/docker-space/dockercleanup.sh dest=~/containers/
+              mode=0744
+  - name: run the clean task
+    shell: ~/containers/dockercleanup.sh
+    
+
+    
+    

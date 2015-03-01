@@ -1,0 +1,12 @@
+---
+- hosts: "{{ targethosts }}"
+  gather_facts: false
+  
+  tasks:
+  - name: test vsphere
+    vsphere_guest:
+        vcenter_hostname: 50.248.177.195
+        username: root
+        password: tclouds
+        guest: tclouds-dev-02
+        vmware_guest_facts: yes
