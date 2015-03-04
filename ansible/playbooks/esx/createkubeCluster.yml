@@ -1,0 +1,20 @@
+---
+- hosts: "{{ targethosts }}"
+  gather_facts: false
+  vars:
+    vmcores: 1
+    vmmemory: 2048
+    vmnetwork_dev: vmxnet3
+    vmnetwork_name: VM Network
+    instanceName: a
+
+  tasks:
+  - raw: /vmfs/volumes/tclouds-vm-images/scripts/createvmfrombase.sh   "{{ item.vmName }}"-"{{instanceName}}" "{{ item.baseimage }}" "{{ vmcores }}" "{{ vmmemory }}" "{{ vmnetwork_dev }}" "{{ vmnetwork_name }}" 
+   
+    with_items:
+   #  - { vmName: 'sky-kube-master-', baseimage: 'tclouds-fedora-base' }
+     - { vmName: 'sky-kube-minion-m1-', baseimage: 'tclouds-fedora-base' }
+     - { vmName: 'sky-kube-minion-m2-', baseimage: 'tclouds-fedora-base' }
+
+  - raw: vim-cmd vmsvc/getallvms
+  

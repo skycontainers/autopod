@@ -1,0 +1,12 @@
+ansible-playbook ./playbooks/esx/createkubeCluster.yml  -i ./inventory/esxhosts -u root --ask-pass  --extra-vars "targethosts=50.248.177.194 instanceName=a"
+
+ansible-playbook ./playbooks/esx/creatvmsingle.yml  -i ./inventory/esxhosts -u root --ask-pass  --extra-vars "targethosts=50.248.177.194 targetvm=kube-master-01 baseimage=tclouds-fedora-base"
+
+
+ansible-playbook ./playbooks/startcontainer.yml  -i ./inventory/dockerhosts -u tclouds --ask-pass --extra-vars "targethosts=10.1.10.31 image_name=elasticsearch"
+ 
+ 
+Kubernetees:
+ ansible-playbook -i inventory pre-setup/ping.yml
+ ansible-playbook -i inventory setup.yml
+ 

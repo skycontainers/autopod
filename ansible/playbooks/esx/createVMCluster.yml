@@ -1,0 +1,29 @@
+    
+
+---
+- hosts: "{{ targethosts }}"
+  gather_facts: false
+  vars:
+    vmcores: 1
+    vmmemory: 2048
+    vmnetwork_dev: vmxnet3
+    vmnetwork_name: VM Network
+    clusterName: sky-mesos-a1
+    baseimage: tclouds-centos7-base
+
+  tasks:
+  - raw: /vmfs/volumes/tclouds-vm-images/scripts/createvmfrombase.sh   "{{ clusterName }}"-"{{item.vmName}}" "{{ baseimage }}" "{{ vmcores }}" "{{ vmmemory }}" "{{ vmnetwork_dev }}" "{{ vmnetwork_name }}" 
+   
+    with_items:
+     - { vmName: 'master-1'}
+     - { vmName: 'master-2'}
+     - { vmName: 'master-3'}
+     - { vmName: 'slave-1' }
+
+  - raw: vim-cmd vmsvc/getallvms
+  
+  
+  
+  
+  
+  

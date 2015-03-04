@@ -1,0 +1,5 @@
+---
+- name: Install etcd from Fedora
+  yum: pkg=etcd state=latest
+  notify:
+          - restart etcd

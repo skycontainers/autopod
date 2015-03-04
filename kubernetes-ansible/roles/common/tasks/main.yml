@@ -1,0 +1,27 @@
+---
+- name: Determine if Atomic
+  command: "grep Atomic /etc/redhat-release"
+  register: is_atomic
+  failed_when: false
+  changed_when: false
+
+- name: Determine if RHEL7
+  shell: "grep 'Red Hat Enterprise Linux.*release 7' /etc/redhat-release"
+  register: is_rhel7
+  failed_when: false
+  changed_when: false
+
+- include: rhel7_repos.yml
+  when: is_rhel7.rc == 0 and is_atomic.rc != 0
+
+- name: Determine if firewalld installed
+  command: "rpm -q firewalld"
+  register: has_firewalld
+  failed_when: "'package firewalld is not installed' not in has_firewalld.stdout and has_firewalld.rc != 0"
+  changed_when: false
+
+- name: Determine if iptables-services installed
+  command: "rpm -q iptables-services"
+  register: has_iptables
+  failed_when: "'package iptables-services is not installed' not in has_iptables.stdout and has_iptables.rc != 0"
+  changed_when: false
