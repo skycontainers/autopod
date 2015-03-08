@@ -1,0 +1,19 @@
+; For more information on the config file, please see:
+; http://supervisord.org/configuration.html
+
+[unix_http_server]
+file={{run_dir}}/supervisord.sock
+chmod=0700                       ; sockef file mode (default 0700)
+
+[supervisord]
+logfile={{log_dir}}/supervisord.log
+pidfile={{log_dir}}/supervisord.pid
+
+[rpcinterface:supervisor]
+supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
+
+[supervisorctl]
+serverurl=unix://{{run_dir}}/supervisord.sock
+
+[include]
+files = {{ supervisor_home }}/conf.d/*.conf

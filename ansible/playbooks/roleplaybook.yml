@@ -1,0 +1,16 @@
+---
+#
+# Java Install Playbook
+#
+
+
+- hosts: all
+  sudo: yes
+  remote_user: tclouds
+  tasks:
+  - hostname: name='zookeeper-{{zoo_id}}'
+  
+  roles:
+    - {role: ../roles/supervisord }
+    - {role: ../roles/zookeeper }
+

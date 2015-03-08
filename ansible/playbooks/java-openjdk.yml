@@ -1,0 +1,14 @@
+---
+#
+# Java Install Playbook
+#
+
+
+- hosts: all
+  sudo: yes
+  tasks:
+    - name: Add pubkeys
+      authorized_key: user=tclouds key="{{ lookup('file', '../keys/dockercloud-authkey.pub') }}"
+  roles:
+    - {role: ../roles/openjdk }
+    
