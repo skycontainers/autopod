@@ -1,0 +1,23 @@
+    
+---
+- hosts: "{{ targethosts }}"
+  gather_facts: false
+  vars:
+    createvmscript: "{{ lookup('file', '../scripts/createvm.sh') }}"
+    clonevmscript: "{{ lookup('file', '../scripts/vmcloneimage.sh') }}"
+    destroyvmscript: "{{ lookup('file', '../scripts/destroyvm.sh') }}"
+    
+  tasks:
+
+  - raw: echo '{{ createvmscript }}'  > /tmp/createvm.sh
+  - raw: chmod +x /tmp/createvm.sh
+  
+  
+  - raw: echo '{{ clonevmscript }}'  > /tmp/cloneimage.sh
+  - raw: chmod +x /tmp/cloneimage.sh
+  
+  - raw: echo '{{ clonevmscript }}'  > /tmp/destroyvm.sh
+  - raw: chmod +x /tmp/destroyvm.sh
+  
+
+  
