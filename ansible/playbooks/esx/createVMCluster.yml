@@ -15,7 +15,7 @@
   - raw: /vmfs/volumes/tclouds-vm-images/scripts/createvm.sh   -t "{{ clusterName }}"-"{{item.vmName}}" -b "{{ baseimage }}" -c "{{ vmcores }}" -r "{{ vmmemory }}" -n "{{ vmnetwork_name }}" -s "{{ basevm_ds }}"
    
     with_items:
-      - { vmName: 'master-1'}
+     - { vmName: 'master-1'}
      - { vmName: 'master-2'}
      - { vmName: 'master-3'}
      - { vmName: 'slave-1' }
