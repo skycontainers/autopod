@@ -1,0 +1,14 @@
+---
+#
+# Java Install Playbook
+#
+
+
+- hosts: all
+  sudo: yes
+  remote_user: tclouds
+  tasks:
+  - hostname: name=mesos
+  
+ 
+

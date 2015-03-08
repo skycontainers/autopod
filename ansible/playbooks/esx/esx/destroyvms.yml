@@ -1,0 +1,24 @@
+    
+
+---
+- hosts: "{{ targethosts }}"
+  gather_facts: false
+  vars:
+    clusterName: sky-mesos-a1
+
+  tasks:
+  - raw: /vmfs/volumes/tclouds-vm-images/scripts/destroyvm.sh   "{{ clusterName }}"-"{{item.vmName}}" 
+   
+    with_items:
+     - { vmName: 'master-1'}
+     - { vmName: 'master-2'}
+     - { vmName: 'master-3'}
+     - { vmName: 'slave-1' }
+
+  - raw: vim-cmd vmsvc/getallvms
+  
+  
+  
+  
+  
+  

@@ -1,0 +1,4 @@
+[zookeeper_hosts]
+10.1.10.57 zoo_id=1
+10.1.10.5 zoo_id=2
+10.1.10.60 zoo_id=3

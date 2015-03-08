@@ -8,9 +8,10 @@
   sudo: yes
   remote_user: tclouds
   tasks:
-  - hostname: name='zookeeper-{{zoo_id}}'
+  - hostname: name='mesos-master-{{zoo_id}}'
   
   roles:
+    - {role: ../roles/openjdk }
     - {role: ../roles/supervisord }
     - {role: ../roles/zookeeper }
 

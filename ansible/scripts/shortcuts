@@ -5,7 +5,8 @@ ansible-playbook ./playbooks/esx/creatvmsingle.yml  -i ./inventory/esxhosts -u r
 
 ansible-playbook ./playbooks/startcontainer.yml  -i ./inventory/dockerhosts -u tclouds --ask-pass --extra-vars "targethosts=10.1.10.31 image_name=elasticsearch"
  
- 
+ansible-playbook ./playbooks/roleplaybook.yml  -i ./inventory/mesoscluster_hosts  -u tclouds --private-key=./keys/dockercloud-authkey
+
 Kubernetees:
  ansible-playbook -i inventory pre-setup/ping.yml
  ansible-playbook -i inventory setup.yml
