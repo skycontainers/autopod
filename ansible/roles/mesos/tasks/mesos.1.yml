@@ -28,14 +28,14 @@
   template: src=conf-mesos-slave.j2 dest=/etc/default/mesos-slave
   when: mesos_install_mode == "slave" or mesos_install_mode == "master-slave"
 
-- name: supervisor startup script for mesos master
-  template: src=supervisor-mesos-master.conf.j2 dest='{{supervisor_config_dir}}/supervisor-mesos-master.conf'
+- name: Mesos master script
+  template: src=init-mesos-master.j2 dest=/tmp/mesos-master.conf
   when: mesos_install_mode == "master" or mesos_install_mode == "master-slave"
   notify:
-    - Restart mesos-master supervisord
+    - Restart mesos-master
 
-- name: supervisor startup script for mesos slave
-  template: src=supervisor-mesos-slave.conf.j2 dest='{{supervisor_config_dir}}/supervisor-mesos-slave.conf'
+- name: Mesos slave script
+  template: src=init-mesos-slave.j2 dest=/etc/init/mesos-slave.conf
   when: mesos_install_mode == "slave" or mesos_install_mode == "master-slave"
   notify:
-    - Restart mesos-slave supervisord
+    - Restart mesos-slave

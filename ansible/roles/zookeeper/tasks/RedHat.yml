@@ -1,4 +1,7 @@
 ---
+- name: Downloading and enable the EPEL repository definitions.
+  yum: name=http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm state=present
+  
 - file: path=/opt/src state=directory
 - file: path={{zookeeper_dir}} state=directory
 

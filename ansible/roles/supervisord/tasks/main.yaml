@@ -55,19 +55,10 @@
   ignore_errors: on
   tags: deploy
   
-#- name: Restart supervisord servoce
-#  service: name=supervisord state=restarted enabled=yes
-#  tags: deploy
+- name: Restart supervisord service
+  service: name=supervisord state=restarted enabled=yes
+  tags: deploy
   
-- name: checking if supervisord is running
-  shell: pgrep -u {{ ansible_user_id }} supervisor
-  ignore_errors: on
-  changed_when: off
-  register: supervisor_running
 
-- name: running supervisord
-  shell: chdir={{ supervisord_home }}
-         {{ supervisord_path }} -c {{ supervisor_config }}
-  when: supervisor_running|failed
   
   

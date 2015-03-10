@@ -7,11 +7,15 @@
 - hosts: all
   sudo: yes
   remote_user: tclouds
+  vars:
+    mesos_install_mode: "slave"
+    mesos_zookeeper_masters:
   tasks:
-  - hostname: name='mesos-master-{{zoo_id}}'
+  - hostname: name='mesos-slave-{{id}}'
   
   roles:
     - {role: ../roles/openjdk }
     - {role: ../roles/supervisord }
     - {role: ../roles/zookeeper }
+    - {role: ../roles/mesos }
 

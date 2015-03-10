@@ -3,13 +3,13 @@
 [Unit]
 Description=Supervisor daemon
 
+
 [Service]
-ExecStart={{ supervisord_home }}{{ supervisord_path }} -c {{ supervisor_config }}
-ExecStop=/usr/bin/supervisorctl -c {{ supervisor_config }} shutdown
-ExecReload=/usr/bin/supervisorctl  -c {{ supervisor_config }} reload
-KillMode=process
-Restart=on-failure
-RestartSec=42s
+Type=forking
+ExecStart=/usr/bin/supervisord -c /etc/supervisor/supervisord.conf
+ExecStop=/usr/bin/supervisorctl -c /etc/supervisor/supervisord.conf shutdown
+ExecReload=/usr/bin/supervisorctl  -c /etc/supervisor/supervisord.conf reload
+
 
 [Install]
 WantedBy=multi-user.target

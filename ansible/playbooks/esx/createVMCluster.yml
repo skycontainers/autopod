@@ -7,7 +7,7 @@
     vmmemory: 2048
     vmnetwork_dev: vmxnet3
     vmnetwork_name: VM Network
-    clusterName: sky-mesos-a1
+    clusterName: doche-mesos
     baseimage: tclouds-centos7-base
     basevm_ds: tclouds-vm-instances
 
@@ -18,8 +18,6 @@
      - { vmName: 'master-1'}
      - { vmName: 'master-2'}
      - { vmName: 'master-3'}
-     - { vmName: 'slave-1' }
-     - { vmName: 'slave-2' }
 
   - raw: vim-cmd vmsvc/getallvms
   

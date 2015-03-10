@@ -5,3 +5,12 @@
 
 - name: Restart mesos-slave 
   service: name=mesos-slave state=restarted
+  
+  
+- name: Restart mesos-master supervisord
+  supervisorctl: name=mesos-master state=restarted config={{supervisor_home}}/supervisord.conf
+
+- name: Restart mesos-slave supervisord
+  supervisorctl: name=mesos-slave state=restarted config={{supervisor_home}}/supervisord.conf
+  
+  

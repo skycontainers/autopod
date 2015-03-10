@@ -7,7 +7,10 @@ ansible-playbook ./playbooks/startcontainer.yml  -i ./inventory/dockerhosts -u t
  
 ansible-playbook ./playbooks/roleplaybook.yml  -i ./inventory/mesoscluster_hosts  -u tclouds --private-key=./keys/dockercloud-authkey
 
+echo -e "[zookeeper_hosts]\n192.168.2.122 zoo_id=1\n192.168.2.102 zoo_id=2\n192.168.2.108 zoo_id=3" > inventory/mesoscluster_hosts                                               
+
+ansible-playbook ./playbooks/esx/destroyvms.yml  -i ./inventory/esxhosts -u root  --private-key=./keys/dockercloud-authkey --extra-vars "targethosts=192.168.2.121"
+
 Kubernetees:
  ansible-playbook -i inventory pre-setup/ping.yml
  ansible-playbook -i inventory setup.yml
- 
