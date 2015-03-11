@@ -50,8 +50,8 @@
   #service: name=zookeeper state=restarted 
   tags: deploy
 
-- name: disable firewalld
-  service: name=firewalld enabled=no state=stopped
+#- name: disable firewalld
+#  service: name=firewalld enabled=no state=stopped
   
   
 

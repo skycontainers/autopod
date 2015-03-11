@@ -11,6 +11,9 @@ echo -e "[zookeeper_hosts]\n192.168.2.122 zoo_id=1\n192.168.2.102 zoo_id=2\n192.
 
 ansible-playbook ./playbooks/esx/destroyvms.yml  -i ./inventory/esxhosts -u root  --private-key=./keys/dockercloud-authkey --extra-vars "targethosts=192.168.2.121"
 
+ansible-playbook ./playbooks/esx/createVMCluster.yml  -i ./inventory/esxhosts -u root  --private-key=./keys/dockercloud-authkey --extra-vars "target
+hosts=192.168.2.121"
+
 Kubernetees:
  ansible-playbook -i inventory pre-setup/ping.yml
  ansible-playbook -i inventory setup.yml

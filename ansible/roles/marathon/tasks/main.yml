@@ -1,14 +1,21 @@
 ---
-- include: Debian.yml
-  when: ansible_os_family == "Debian"
 
-- include: RedHat.yml
-  when: ansible_os_family == "RedHat"
 
-- include: conf.yml
 
-- include: haproxy.yml
-  when: haproxy_script_location != ""
+- name: Download marathon version.
+  get_url: url=http://downloads.mesosphere.com/marathon/v{{marathon_version}}/marathon-{{marathon_version}}.tgz dest=/opt/marathon-{{marathon_version}}.tgz
+  tags: bootstrap
+  
+- file: path={{marathon_dir}} state=directory
+  
+- name: Unpack tarball.
+  command: tar zxf /opt/marathon-{{marathon_version}}.tgz --strip-components=1 chdir={{marathon_dir}} creates={{marathon_dir}}/bin
+  tags: bootstrap
+  
+- name: supervisor startup script for marathon
+  template: src=supervisor-marathon.conf.j2 dest='{{supervisor_config_dir}}/supervisor-marathon.conf'
+  
+- name: Start marathon
+  supervisorctl: name=marathon state=restarted config={{supervisor_home}}/supervisord.conf
+  tags: deploy
 
-- name: Start Marathon service
-  service: name=marathon state=restarted 

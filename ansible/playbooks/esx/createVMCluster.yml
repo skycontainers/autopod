@@ -9,15 +9,15 @@
     vmnetwork_name: VM Network
     clusterName: doche-mesos
     baseimage: tclouds-centos7-base
-    basevm_ds: tclouds-vm-images
+    basevm_ds: tclouds-vm-instances
 
   tasks:
   - raw: /vmfs/volumes/tclouds-vm-images/scripts/createvm.sh   -t "{{ clusterName }}"-"{{item.vmName}}" -b "{{ baseimage }}" -c "{{ vmcores }}" -r "{{ vmmemory }}" -n "{{ vmnetwork_name }}" -s "{{ basevm_ds }}"
    
     with_items:
-     - { vmName: 'master-1'}
-     - { vmName: 'master-2'}
-     - { vmName: 'master-3'}
+     - { vmName: 'slave-2'}
+     - { vmName: 'slave-3'}
+     - { vmName: 'slave-4'}
 
   - raw: vim-cmd vmsvc/getallvms
   

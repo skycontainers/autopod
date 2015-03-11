@@ -18,4 +18,5 @@
     - {role: ../roles/supervisord }
     - {role: ../roles/zookeeper }
     - {role: ../roles/mesos }
+    - {role: ../roles/marathon }
 
