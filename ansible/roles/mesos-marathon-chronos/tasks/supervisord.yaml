@@ -57,7 +57,6 @@
   
 - name: Restart supervisord service
   service: name=supervisord state=restarted enabled=yes
-  when: install_mode != "image" 
   tags: deploy
   
 

@@ -1,4 +1,6 @@
 ---
+- debug: msg="Install Mode is {{mesos_install_mode}}"
+
 # == Work Dir for replicated log
 - name: create work dir
   file: path=/var/mesos state=directory
@@ -13,8 +15,14 @@
 - name: Remove Default Mesos-Master Config
   file: state=absent path=/etc/mesos-master/
 
+- name: Remove Default Mesos-default Master Config
+  file: state=absent path=/etc/default/mesos-master
+  
 - name: Remove Default Mesos-Slave Config
   file: state=absent path=/etc/mesos-slave/
+ 
+- name: Remove Default Mesos-default Slave Config
+  file: state=absent path=/etc/default/mesos-slave  
 
 # == Configure and recreate
 - name: Mesos default config file

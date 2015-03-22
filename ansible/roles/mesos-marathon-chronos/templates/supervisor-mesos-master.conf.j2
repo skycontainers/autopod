@@ -1,0 +1,11 @@
+
+[program:mesos-master]
+command=/usr/bin/mesos-init-wrapper master
+autostart=true
+autorestart=true
+startsecs=3
+stdout_logfile=/var/log/mesos/mesos_master_console.log
+stdout_logfile_maxbytes=1MB
+stdout_logfile_backups=3
+stdout_capture_maxbytes=1MB
+priority=999

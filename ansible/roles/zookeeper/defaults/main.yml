@@ -4,6 +4,8 @@ zookeeper_playbook_version: "0.0.3"
 zookeeper_version: 3.4.6
 zookeeper_url: http://www.us.apache.org/dist/zookeeper/zookeeper-{{zookeeper_version}}/zookeeper-{{zookeeper_version}}.tar.gz
 
+install_mode: instance
+
 supervisor_home: /etc/supervisor
 supervisor_config_dir: '{{supervisor_home}}/conf.d'
 

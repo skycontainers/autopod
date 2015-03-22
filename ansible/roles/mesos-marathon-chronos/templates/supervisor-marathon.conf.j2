@@ -1,0 +1,11 @@
+
+[program:marathon]
+command={{marathon_dir}}/bin/start --master {{ mesos_zookeeper_masters }} --zk_hosts {{ zookeeper_hosts_path }}
+autostart=true
+autorestart=true
+startsecs=3
+stdout_logfile=/var/log/mesos/marathon_console.log
+stdout_logfile_maxbytes=1MB
+stdout_logfile_backups=3
+stdout_capture_maxbytes=1MB
+priority=1000

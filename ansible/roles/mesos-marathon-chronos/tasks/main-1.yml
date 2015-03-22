@@ -1,0 +1,80 @@
+---
+
+- file: path=/opt/src state=directory
+- file: path={{zookeeper_dir}} state=directory
+
+- name: Download zookeeper version.
+  get_url: url={{zookeeper_url}} dest=/opt/src/zookeeper-{{zookeeper_version}}.tar.gz
+  tags: bootstrap
+
+- name: Install OS Packages
+  yum: name={{ item }} state=present
+  with_items:
+    - libselinux-python
+
+- name: Unpack tarball.
+  command: tar zxf /opt/src/zookeeper-{{zookeeper_version}}.tar.gz --strip-components=1 chdir={{zookeeper_dir}} creates={{zookeeper_dir}}/bin
+  tags: bootstrap
+
+- group: name=zookeeper system=yes
+- user: name=zookeeper group=zookeeper system=yes
+
+- name: Change ownership on zookeeper directory.
+  file: path={{zookeeper_dir}} state=directory owner=zookeeper group=zookeeper recurse=yes
+  tags: bootstrap
+
+- name: Create zookeeper data folder.
+  file: path={{data_dir}} state=directory recurse=yes owner=zookeeper group=zookeeper
+  tags: bootstrap
+
+- name: Create zookeeper logs folder.
+  file: path={{log_dir}} state=directory recurse=yes owner=zookeeper group=zookeeper
+  tags: bootstrap
+
+- name: Upstart script.
+  template: src=supervisor-zookeeper.conf.j2 dest={{supervisor_config_dir}}/supervisor-zookeeper.conf
+  tags: deploy
+
+- name: Write myid file.
+  template: src=myid.j2 dest={{data_dir}}/myid owner=zookeeper group=zookeeper
+  tags: deploy
+
+- name: Configure zookeeper
+  template: src=zoo.cfg.j2 dest={{ zookeeper_dir }}/conf/zoo.cfg owner=zookeeper group=zookeeper
+  tags: deploy
+
+
+- debug: msg="Install Mode is {{mesos_install_mode}}"
+
+
+- name: Download marathon version.
+  get_url: url=http://downloads.mesosphere.com/marathon/v{{marathon_version}}/marathon-{{marathon_version}}.tgz dest=/opt/marathon-{{marathon_version}}.tgz
+  tags: bootstrap
+  
+- file: path={{marathon_dir}} state=directory
+  
+- name: Unpack tarball.
+  command: tar zxf /opt/marathon-{{marathon_version}}.tgz --strip-components=1 chdir={{marathon_dir}} creates={{marathon_dir}}/bin
+  tags: bootstrap
+  
+- name: supervisor startup script for marathon
+  template: src=supervisor-marathon.conf.j2 dest='{{supervisor_config_dir}}/supervisor-marathon.conf'
+  
+
+
+- name: Download Chronos Version.
+  get_url: url=http://downloads.mesosphere.io/chronos/chronos-{{chronos_version}}_mesos-0.14.0-rc4.tgz dest=/opt/chronos-{{chronos_version}}.tgz
+  tags: bootstrap
+  
+  
+- file: path={{chronos_install_location}} state=directory
+  
+- name: Unpack tarball chronos.
+  command: tar zxf /opt/chronos-{{chronos_version}}.tgz --strip-components=1 chdir=/opt creates={{chronos_install_location}}/bin
+  tags: bootstrap
+  
+- name: supervisor startup script for chronos
+  template: src=supervisor-chronos.conf.j2 dest='{{supervisor_config_dir}}/supervisor-chronos.conf'
+  
+
+  

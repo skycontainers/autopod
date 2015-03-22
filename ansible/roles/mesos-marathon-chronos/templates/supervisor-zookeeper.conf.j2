@@ -1,0 +1,10 @@
+
+[program:zookeeper]
+command={{zookeeper_dir}}/bin/zkServer.sh start-foreground
+autostart=true
+autorestart=true
+startsecs=3
+stdout_logfile=/var/log/zookeeper/zk_console.log
+stdout_logfile_maxbytes=1MB
+stdout_logfile_backups=3
+stdout_capture_maxbytes=1MB

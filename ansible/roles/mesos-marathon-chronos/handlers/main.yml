@@ -1,0 +1,20 @@
+---
+
+- name: Restart mesos-master supervisord
+  supervisorctl: name=mesos-master state=restarted config={{supervisor_home}}/supervisord.conf
+
+- name: Restart mesos-slave supervisord
+  supervisorctl: name=mesos-slave state=restarted config={{supervisor_home}}/supervisord.conf
+  
+- name: Restart mesos-slave Marathon
+  supervisorctl: name=mesos-slave state=restarted config={{supervisor_home}}/supervisord.conf
+  
+- name: Restart marathon
+  supervisorctl: name=marathon state=restarted config={{supervisor_home}}/supervisord.conf
+  tags: deploy
+  
+- name: Start zookeeper
+  supervisorctl: name=zookeeper state=restarted config={{supervisor_home}}/supervisord.conf
+  tags: deploy
+  
+  

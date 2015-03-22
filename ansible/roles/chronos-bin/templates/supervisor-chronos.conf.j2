@@ -1,0 +1,11 @@
+
+[program:chronos]
+command={{chronos_install_location}}/bin/start-chronos.bash --master {{ chronos_runtime_master }} --zk_hosts {{ mesos_zookeeper_masters }} --http_port {{chronos_http_port}}
+autostart=true
+autorestart=true
+startsecs=3
+stdout_logfile=/var/log/mesos/chronos_console.log
+stdout_logfile_maxbytes=1MB
+stdout_logfile_backups=3
+stdout_capture_maxbytes=1MB
+priority=1000

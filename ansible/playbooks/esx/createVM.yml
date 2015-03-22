@@ -1,0 +1,24 @@
+    
+---
+- hosts: "{{ targethosts }}"
+  gather_facts: false
+  vars:
+    vmcores: 1
+    vmmemory: 2048
+    vmnetwork_dev: vmxnet3
+    vmnetwork_name: VM Network
+    vm_name: doche-mesos-base
+    baseimage: tclouds-centos7-base
+    basevm_ds: tclouds-vm-images
+    target_ds: tclouds-vm-images
+
+  tasks:
+  - raw: /vmfs/volumes/tclouds-vm-images/scripts/createvm.sh   -t "{{ vm_name }}" -b "{{ baseimage }}" -c "{{ vmcores }}" -r "{{ vmmemory }}" -n "{{ vmnetwork_name }}" -s "{{ basevm_ds }}" -d "{{ target_ds }}"
+   
+  - raw: vim-cmd vmsvc/getallvms
+  
+  
+  
+  
+  
+  

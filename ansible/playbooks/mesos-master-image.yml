@@ -8,12 +8,10 @@
   sudo: yes
   remote_user: tclouds
   vars:
-    zookeeper_hostnames: 10.1.10.20:2181,10.1.10.22:2181,10.1.10.23:2181
-    chronos_master: 10.1.10.20:2181
-    mesos_install_mode: "master"
+    mesos_install_mode: "image"
+    install_mode: "image"
   tasks:
-  - hostname: name='mesos-master-{{zoo_id}}'
-  - raw:hostnamectl set-hostname 'mesos-master-{{zoo_id}}'
+    - raw: hostnamectl set-hostname mesos-master-base
   
   roles:
     - {role: ../roles/openjdk }

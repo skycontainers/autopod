@@ -1,0 +1,91 @@
+---
+
+---
+ansible_playbook_version: 0.1
+zookeeper_version: 3.4.6
+zookeeper_url: http://www.us.apache.org/dist/zookeeper/zookeeper-{{zookeeper_version}}/zookeeper-{{zookeeper_version}}.tar.gz
+
+supervisor_home: /etc/supervisor
+supervisor_config_dir: '{{supervisor_home}}/conf.d'
+
+
+apt_cache_timeout: 3600
+client_port: 2181
+init_limit: 5
+sync_limit: 2
+tick_time: 2000
+zoo_id: 1
+data_dir: /var/lib/zookeeper
+log_dir: /var/log/zookeeper
+zookeeper_dir: /opt/zookeeper-{{zookeeper_version}}
+zookeeper_hosts:
+  - inventory_hostname
+  
+
+marathon_hostname: "{{ inventory_hostname }}"
+marathon_version: "0.7.6"
+marathon_port: 8080
+marathon_apt_repo: "deb http://repos.mesosphere.io/{{ansible_distribution|lower}} {{ansible_distribution_release|lower}} main"
+
+# command line flags:
+# https://mesosphere.github.io/marathon/docs/command-line-flags.html
+# Marathon reads files under /etc/marathon/conf and adds them to CLI
+#zookeeper_hostnames: "localhost:2181"
+mesos_zookeeper_path: "/mesos"
+marathon_zookeeper_path: "/marathon"
+mesos_zookeeper_masters: "zk://{{ zookeeper_hostnames }}{{ mesos_zookeeper_path }}"
+marathon_zookeeper_state: "zk://{{ zookeeper_hostnames }}{{ marathon_zookeeper_path }}"
+zookeeper_hosts_path: "{{ zookeeper_hostnames }}{{ marathon_zookeeper_path }}"
+haproxy_script_location: "/usr/local/bin"
+
+marathon_dir: /opt/marathon-{{marathon_version}}
+
+# optional
+artifact_store: ""
+checkpoint: "true"
+
+
+# conf file settings
+mesos_cluster_name: "mesos_cluster"
+mesos_ip: "{{ansible_default_ipv4.address}}"
+mesos_hostname: "{{ inventory_hostname }}"
+mesos_port: "5050"
+mesos_log_location: "/var/log/mesos"
+mesos_ulimit: "-n 8192"
+mesos_options: "--log_dir=$LOGS"
+mesos_work_dir: "/var/mesos"
+mesos_quorum: "1"
+zookeeper_client_port: "2181"
+zookeeper_hostnames: "{{ mesos_hostname }}:{{ zookeeper_client_port }}"
+mesos_zookeeper_masters: "zk://{{ zookeeper_hostnames }}/mesos" 
+
+# Containerizer
+mesos_containerizers: "mesos"
+mesos_executor_timeout: "5mins"
+
+
+chronos_hostname: "{{ inventory_hostname }}"
+
+
+mesos_zookeeper_path: "/mesos"
+
+
+
+# == base ==
+chronos_playbook_version: "0.1.1"
+
+
+chronos_app_name: "chronos" # see Aurora
+
+chronos_version: "2.1.0"
+
+# == install ==
+chronos_install_location: "/opt/{{chronos_app_name}}"
+chronos_runtime_zookeeper_hosts:  "zk://{{ zookeeper_hostnames }}{{ mesos_zookeeper_path }}"
+chronos_runtime_master: "zk://{{ chronos_master }}{{ mesos_zookeeper_path }}"
+chronos_http_port: "8081"
+chronos_https_port: "8443"
+
+
+
+

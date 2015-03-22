@@ -1,0 +1,25 @@
+---
+
+
+
+- name: Download marathon version.
+  get_url: url=http://downloads.mesosphere.io/chronos/chronos-{{chronos_version}}_mesos-0.14.0-rc4.tgz dest=/opt/chronos-{{chronos_version}}.tgz
+  tags: bootstrap
+  
+  
+
+- file: path={{chronos_install_location}} state=directory
+  
+- name: Unpack tarball chronos.
+  command: tar zxf /opt/chronos-{{chronos_version}}.tgz --strip-components=1 chdir=/opt creates={{chronos_install_location}}/bin
+  tags: bootstrap
+  
+- name: supervisor startup script for chronos
+  template: src=supervisor-chronos.conf.j2 dest='{{supervisor_config_dir}}/supervisor-chronos.conf'
+  when: install_mode != "image"
+  
+- name: Start chronos
+  supervisorctl: name=chronos state=restarted config={{supervisor_home}}/supervisord.conf
+  when: install_mode != "image"
+  tags: deploy
+

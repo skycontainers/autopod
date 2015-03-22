@@ -1,7 +1,5 @@
 ---
 
-
-
 - name: Download marathon version.
   get_url: url=http://downloads.mesosphere.com/marathon/v{{marathon_version}}/marathon-{{marathon_version}}.tgz dest=/opt/marathon-{{marathon_version}}.tgz
   tags: bootstrap
@@ -14,10 +12,5 @@
   
 - name: supervisor startup script for marathon
   template: src=supervisor-marathon.conf.j2 dest='{{supervisor_config_dir}}/supervisor-marathon.conf'
-  when: install_mode != "image"
-   
-- name: Start marathon
-  supervisorctl: name=marathon state=restarted config={{supervisor_home}}/supervisord.conf
-  when: install_mode != "image"
-  tags: deploy
+  
 

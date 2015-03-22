@@ -1,7 +1,5 @@
 ---
-- name: Downloading and enable the EPEL repository definitions.
-  yum: name=http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm state=present
-  
+
 - file: path=/opt/src state=directory
 - file: path={{zookeeper_dir}} state=directory
 
@@ -35,23 +33,16 @@
 
 - name: Upstart script.
   template: src=supervisor-zookeeper.conf.j2 dest={{supervisor_config_dir}}/supervisor-zookeeper.conf
-  when: install_mode != "image"
   tags: deploy
 
 - name: Write myid file.
   template: src=myid.j2 dest={{data_dir}}/myid owner=zookeeper group=zookeeper
-  when: install_mode != "image"
   tags: deploy
 
 - name: Configure zookeeper
   template: src=zoo.cfg.j2 dest={{ zookeeper_dir }}/conf/zoo.cfg owner=zookeeper group=zookeeper
-  when: install_mode != "image"
   tags: deploy
 
-- name: Start zookeeper
-  supervisorctl: name=zookeeper state=restarted config={{supervisor_home}}/supervisord.conf
-  when: install_mode != "image" 
-  tags: deploy
 
   
   

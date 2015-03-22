@@ -9,11 +9,12 @@
   remote_user: tclouds
   vars:
     mesos_install_mode: "slave"
-    zookeeper_hostnames: 192.168.2.142:2181,192.168.2.148:2181,192.168.2.114:2181
+    zookeeper_hostnames: 10.1.10.20:2181,10.1.10.22:2181,10.1.10.23:2181
   tasks:
   - hostname: name='mesos-slave-{{id}}'
   - service: name=firewalld enabled=no state=stopped
   roles:
+    - {role: ../roles/openjdk }
     - {role: ../roles/supervisord }
     - {role: ../roles/mesos }
 

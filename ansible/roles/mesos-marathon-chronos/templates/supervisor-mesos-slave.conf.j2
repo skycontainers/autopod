@@ -1,0 +1,10 @@
+[program:mesos-slave]
+command=/usr/bin/mesos-init-wrapper slave
+autostart=true
+autorestart=true
+startsecs=3
+stdout_logfile=/var/log/mesos/mesos_slave_console.log
+stdout_logfile_maxbytes=1MB
+stdout_logfile_backups=3
+stdout_capture_maxbytes=1MB
+priority=999
