@@ -1,0 +1,65 @@
+- name: Install python pip
+  yum: name={{ item }} state=present
+  with_items:
+    - python-pip
+    
+- name: installing supervisor
+  pip: name=supervisor
+       version="{{ supervisor_version }}"
+       use_mirrors=no
+       #{% if pip_args %} extra_args="{{ pip_args }}" {% endif %}
+
+- name: ensuring required supervisor directories
+  file: path={{ item }}
+        state=directory
+  with_items:
+    - '{{ bin_dir }}'
+    - '{{ supervisor_config_dir }}'
+
+- name: installing supervisord as systemd service
+  template: src=supervisord.service
+            dest=/etc/systemd/system
+            
+- name: installing supervisor configuration
+  template: src=supervisord.conf.j2
+            dest={{ supervisor_config }}
+
+- name: installing wrapper scripts
+  template: src={{ item.src }}
+            dest={{ item.dest }}
+            mode=754
+  with_items:
+    - src: supervisorctl.sh.j2
+      dest: '{{ bin_dir }}/supervisorctl'
+    - src: supervisord.sh.j2
+      dest: '{{ bin_dir }}/supervisord'
+
+- name: creating (optional) link parent dir
+  when: supervisor_link != False
+  file: path={{ supervisor_link|dirname }} state=directory
+
+- name: setting up supervisor (optional) symlink
+  when: supervisor_link != False
+  file: src={{ supervisor_home }}
+        dest={{ supervisor_link }}
+        state=link
+
+- name: installing supervisor http server
+  when: supervisor_http
+  template: src=supervisor-http.ini.j2
+            dest={{ supervisor_config_dir }}/supervisor-http.ini
+            mode=754
+
+- name: stop supervisor if started
+  supervisorctl: state=shutdown config={{ supervisor_config }}
+  ignore_errors: on
+  tags: deploy
+  
+- name: Restart supervisord service
+  service: name=supervisord state=restarted enabled=yes
+  when: install_mode != "image" 
+  tags: deploy
+  
+
+  
+  

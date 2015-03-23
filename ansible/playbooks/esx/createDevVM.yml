@@ -13,7 +13,7 @@
     target_ds: tclouds-vm-instances
 
   tasks:
-  - raw: /vmfs/volumes/tclouds-vm-images/scripts/createvm.sh   -t "{{ vm_name }}" -b "{{ baseimage }}" -c "{{ vmcores }}" -r "{{ vmmemory }}" -n "{{ vmnetwork_name }}" -s "{{ basevm_ds }}" -d "{{ target_ds }}"
+  - raw: /vmfs/volumes/tclouds-vm-images/scripts/createvm-dev.sh   -t "{{ vm_name }}" -b "{{ baseimage }}" -c "{{ vmcores }}" -r "{{ vmmemory }}" -n "{{ vmnetwork_name }}" -s "{{ basevm_ds }}" -d "{{ target_ds }}"
    
   - raw: vim-cmd vmsvc/getallvms
   

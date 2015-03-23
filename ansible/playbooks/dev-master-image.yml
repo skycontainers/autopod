@@ -1,0 +1,25 @@
+---
+#
+# Java Install Playbook
+#
+
+
+- hosts: "{{ targethosts }}"
+  sudo: yes
+  remote_user: tclouds
+  vars:
+    install_mode: "dev"
+    hostname: "doche-dev-02"
+    doche_aws_access_key: ""
+    doche_aws_secret_key: ""
+    doche_external_ip: "50.248.177.198"
+  tasks:
+    - raw: hostnamectl set-hostname {{hostname}}
+    - raw: nmcli con add type ethernet con-name public_wired ifname ens192 ip4 {{doche_external_ip}}/20 gw4 50.248.177.206
+    
+      
+      
+  roles:
+    - {role: ../roles/openjdk }
+    - {role: ../roles/supervisord }
+   
