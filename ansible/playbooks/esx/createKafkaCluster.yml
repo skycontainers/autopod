@@ -1,0 +1,22 @@
+---
+- hosts: "{{ targethosts }}"
+  gather_facts: false
+  vars:
+    vmcores: 1
+    vmmemory: 2048
+    vmnetwork_dev: vmxnet3
+    vmnetwork_name: VM Network
+    baseimage: tclouds-centos7-base
+    basevm_ds: tclouds-vm-images
+    target_ds: tclouds-vm-instances
+
+  tasks:
+  - raw: /vmfs/volumes/tclouds-vm-images/scripts/createvm.sh   -t "{{ vm_name }}" -b "{{ baseimage }}" -c "{{ vmcores }}" -r "{{ vmmemory }}" -n "{{ vmnetwork_name }}" -s "{{ basevm_ds }}" -d "{{ target_ds }}"
+   
+    with_items:
+     - { vmName: 'doche-kafka-n1'}
+     - { vmName: 'doche-kafka-n2'}
+     - { vmName: 'doche-kafka-n3'}
+
+  - raw: vim-cmd vmsvc/getallvms
+  

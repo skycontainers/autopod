@@ -4,15 +4,20 @@
 #
 
 
-- hosts: all
+- hosts: "{{ targethosts }}"
   sudo: yes
   remote_user: tclouds
   vars:
     mesos_install_mode: "slave"
-    zookeeper_hostnames: 10.1.10.20:2181,10.1.10.22:2181,10.1.10.23:2181
+    install_mode: "slave"
+    zookeeper_hostnames: zk1.cloud.doche.io:2181,zk2.cloud.doche.io:2181,zk3.cloud.doche.io:2181
+    #mesos_slave_attributes: hypervisor:3;region:us;zone:east;type:stateless;os:centos7;grid:doche
   tasks:
-  - hostname: name='mesos-slave-{{id}}'
+  - raw: hostnamectl set-hostname 'mesos-slave-{{id}}'
+  - name: copy the docker registry login cfg file
+    template: src=templates/dockercfg.j2 dest=/etc/supervisor/conf.d/.dockercfg
   - service: name=firewalld enabled=no state=stopped
+  
   roles:
     - {role: ../roles/openjdk }
     - {role: ../roles/supervisord }

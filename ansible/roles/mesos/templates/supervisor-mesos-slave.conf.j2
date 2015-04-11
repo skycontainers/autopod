@@ -1,5 +1,6 @@
 [program:mesos-slave]
-command=/usr/bin/mesos-init-wrapper slave
+command=/usr/bin/mesos-init-wrapper  slave
+#user=tclouds
 autostart=true
 autorestart=true
 startsecs=3

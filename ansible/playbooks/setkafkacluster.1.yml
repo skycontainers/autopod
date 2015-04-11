@@ -1,0 +1,34 @@
+---
+#
+# Java Kafka Cluster setup Playbook
+#
+
+
+- hosts: all
+  sudo: yes
+  remote_user: tclouds
+  vars:
+    cluster_hosts: 10.1.10.53,10.1.10.54,10.1.10.55
+  tasks:
+  - name: ensure private key and public one are present
+    copy: src=/home/tclouds/devzone/autopod/ansible/keys/dockercloud-authkey dest="/home/tclouds/.ssh/dockercloud-authkey" mode=0600 owner=tclouds
+  - name: App | Cloning repos + submodules
+    git: repo=git@github.com:skycontainers/docker-space.git
+           dest=/home/tclouds/devzone/docker-space
+           accept_hostkey=yes
+           force=yes
+           recursive=no
+           key_file=/home/tclouds/.ssh/dockercloud-authkey
+           
+  - raw: cd /home/tclouds/devzone/docker-space ; ./doche-zookeeper/startinstance.sh {{cluster_hosts}}
+    
+- hosts: all
+  sudo: yes
+  remote_user: tclouds
+  vars:
+    cluster_hosts: 10.1.10.53,10.1.10.54,10.1.10.55
+  tasks:
+    - raw: cd /home/tclouds/devzone/docker-space ; ./doche-kafka/startinstance.sh {{cluster_hosts}}
+    
+   
+ 

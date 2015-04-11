@@ -1,0 +1,29 @@
+[esx3]
+10.1.10.17 id=17 mesos_slave_attributes=hypervisor:3;region:us;zone:east;type:stateless;os:centos7;grid:doche
+10.1.10.18 id=18 mesos_slave_attributes=hypervisor:3;region:us;zone:east;type:stateless;os:centos7;grid:doche
+10.1.10.19 id=19 mesos_slave_attributes=hypervisor:3;region:us;zone:east;type:stateless;os:centos7;grid:doche
+10.1.10.21 id=21 mesos_slave_attributes=hypervisor:3;region:us;zone:east;type:stateless;os:centos7;grid:doche
+10.1.10.24 id=24 mesos_slave_attributes=hypervisor:3;region:us;zone:east;type:stateless;os:centos7;grid:doche
+10.1.10.25 id=25 mesos_slave_attributes=hypervisor:3;region:us;zone:east;type:stateless;os:centos7;grid:doche
+10.1.10.26 id=26 mesos_slave_attributes=hypervisor:3;region:us;zone:east;type:stateless;os:centos7;grid:doche
+10.1.10.27 id=27 mesos_slave_attributes=hypervisor:3;region:us;zone:east;type:stateless;os:centos7;grid:doche
+
+
+[esx1]
+10.1.10.66 id=66 mesos_slave_attributes=hypervisor:1;region:us;zone:west;type:stateless;os:centos7;grid:doche
+10.1.10.67 id=67 mesos_slave_attributes=hypervisor:1;region:us;zone:west;type:stateless;os:centos7;grid:doche
+10.1.10.68 id=68 mesos_slave_attributes=hypervisor:1;region:us;zone:west;type:stateless;os:centos7;grid:doche
+10.1.10.70 id=70 mesos_slave_attributes=hypervisor:1;region:us;zone:west;type:stateless;os:centos7;grid:doche
+10.1.10.72 id=72 mesos_slave_attributes=hypervisor:1;region:us;zone:west;type:stateless;os:centos7;grid:doche
+
+[esx2]
+10.1.10.69 id=69 mesos_slave_attributes=hypervisor:2;region:us;zone:soth;type:stateless;os:centos7;grid:doche
+10.1.10.71 id=71 mesos_slave_attributes=hypervisor:2;region:us;zone:south;type:stateless;os:centos7;grid:doche
+10.1.10.64 id=64 mesos_slave_attributes=hypervisor:2;region:us;zone:south;type:db;os:centos7;grid:doche-db
+10.1.10.50 id=50 mesos_slave_attributes=hypervisor:2;region:us;zone:south;type:db;os:centos7;grid:doche-db
+10.1.10.45 id=45 mesos_slave_attributes=hypervisor:2;region:us;zone:south;type:dev;os:centos7;grid:doche-dev
+10.1.10.53 id=53 mesos_slave_attributes=hypervisor:2;region:us;zone:south;type:kafka;os:centos7;grid:doche-kafka
+10.1.10.54 id=54 mesos_slave_attributes=hypervisor:2;region:us;zone:south;type:kafka;os:centos7;grid:doche-kafka
+10.1.10.55 id=55 mesos_slave_attributes=hypervisor:2;region:us;zone:south;type:kafka;os:centos7;grid:doche-kafka
+
+

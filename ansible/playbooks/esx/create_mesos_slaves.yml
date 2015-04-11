@@ -1,0 +1,27 @@
+---
+- hosts: "{{ targethosts }}"
+  gather_facts: false
+  vars:
+    vmcores: 1
+    vmmemory: 2048
+    vmnetwork_dev: vmxnet3
+    vmnetwork_name: VM Network
+    baseimage: doche-mesos-slave-base
+    basevm_ds: tclouds-vm-instances
+    target_ds: tclouds-vm-instances
+
+  tasks:
+  - raw: /vmfs/volumes/tclouds-vm-images/scripts/createvm.sh   -t "{{ item.vmName }}" -b "{{ baseimage }}" -c "{{ vmcores }}" -r "{{ vmmemory }}" -n "{{ vmnetwork_name }}" -s "{{ basevm_ds }}" -d "{{ target_ds }}"
+   
+    with_items:
+     - { vmName: 'doche-slave-e1'}
+     - { vmName: 'doche-slave-e2'}
+     - { vmName: 'doche-slave-e3'}
+     - { vmName: 'doche-slave-e4'}
+     - { vmName: 'doche-slave-e5'}
+     - { vmName: 'doche-slave-e6'}
+     - { vmName: 'doche-slave-e7'}
+     - { vmName: 'doche-slave-e8'}
+     
+  - raw: vim-cmd vmsvc/getallvms
+  

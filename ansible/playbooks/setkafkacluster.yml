@@ -1,0 +1,15 @@
+---
+#
+# Java Kafka Cluster setup Playbook
+#
+
+
+- hosts: all
+  remote_user: tclouds
+  vars:
+    cluster_hosts: 10.1.10.53,10.1.10.54,10.1.10.55
+  tasks:
+     - raw: cd /home/tclouds/devzone/docker-space ; ./doche-kafka-zk/startinstance.sh {{cluster_hosts}}
+    
+   
+ 

@@ -1,0 +1,18 @@
+- hosts: localhost
+  connection: local
+  gather_facts: False
+
+  tasks:
+    - name: Provision a set of instances
+      ec2:
+        key_name: doche-ec2
+        aws_access_key: AKIAJTMLATH6I5UB2ZZQ
+        aws_secret_key: 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
+        group: webserver
+        instance_type: t2.micro
+        image: ami-1ecae776
+        wait: yes
+        region: us-east-1
+        wait_timeout: 500
+        vpc_subnet_id: subnet-a97c3e93
+        assign_public_ip: yes
