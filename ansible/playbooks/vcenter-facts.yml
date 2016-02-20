@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+
+  tasks:
+    - name: Provision a set of instances
+      vsphere_guest:
+        vcenter_hostname: vcenter-east.doche.io
+        username: administrator@vsphere.local
+        password: Tclouds@123
+        guest: mynewvm
+        vmware_guest_facts: yes
+    - debug: msg="System has uuid {{ hw_eth0.ipaddresses[0] }}"

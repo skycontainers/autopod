@@ -1,12 +1,11 @@
 [esx3]
-10.1.10.17 id=17 mesos_slave_attributes=hypervisor:3;region:us;zone:east;type:stateless;os:centos7;grid:doche
-10.1.10.18 id=18 mesos_slave_attributes=hypervisor:3;region:us;zone:east;type:stateless;os:centos7;grid:doche
-10.1.10.19 id=19 mesos_slave_attributes=hypervisor:3;region:us;zone:east;type:stateless;os:centos7;grid:doche
-10.1.10.21 id=21 mesos_slave_attributes=hypervisor:3;region:us;zone:east;type:stateless;os:centos7;grid:doche
-10.1.10.24 id=24 mesos_slave_attributes=hypervisor:3;region:us;zone:east;type:stateless;os:centos7;grid:doche
-10.1.10.25 id=25 mesos_slave_attributes=hypervisor:3;region:us;zone:east;type:stateless;os:centos7;grid:doche
-10.1.10.26 id=26 mesos_slave_attributes=hypervisor:3;region:us;zone:east;type:stateless;os:centos7;grid:doche
-10.1.10.27 id=27 mesos_slave_attributes=hypervisor:3;region:us;zone:east;type:stateless;os:centos7;grid:doche
+10.1.10.34 id=34 mesos_slave_attributes=hypervisor:3;region:us;zone:east;type:stateless;os:centos7;grid:doche
+10.1.10.35 id=35 mesos_slave_attributes=hypervisor:3;region:us;zone:east;type:stateless;os:centos7;grid:doche
+10.1.10.36 id=36 mesos_slave_attributes=hypervisor:3;region:us;zone:east;type:stateless;os:centos7;grid:doche
+10.1.10.37 id=37 mesos_slave_attributes=hypervisor:3;region:us;zone:east;type:stateless;os:centos7;grid:doche
+10.1.10.38 id=38 mesos_slave_attributes=hypervisor:3;region:us;zone:east;type:stateless;os:centos7;grid:doche
+10.1.10.39 id=39 mesos_slave_attributes=hypervisor:3;region:us;zone:east;type:stateless;os:centos7;grid:doche
+10.1.10.40 id=40 mesos_slave_attributes=hypervisor:3;region:us;zone:east;type:stateless;os:centos7;grid:doche
 
 
 [esx1]

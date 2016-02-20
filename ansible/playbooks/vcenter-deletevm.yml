@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+
+  tasks:
+    - name: Delete VM
+      vsphere_guest:
+        vcenter_hostname: vcenter-east.doche.io
+        username: administrator@vsphere.local
+        password: Tclouds@123
+        guest: "{{vmName}}"
+        state: absent
+        force: yes

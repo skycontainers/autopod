@@ -1,0 +1,45 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+
+  tasks:
+    - name: Provision a set of instances
+      vsphere_guest:
+        vcenter_hostname: vcenter-east.doche.io
+        username: administrator@sphere.local
+        password: Tclouds@123
+        guest: newvm001
+        state: powered_on
+        vm_extra_config:
+            vcpu.hotadd: yes
+            mem.hotadd:  yes
+            notes: This is a test VM
+        vm_disk:
+            disk1:
+                size_gb: 10
+                type: thin
+                datastore: storage001
+        vm_nic:
+            nic1:
+                type: vmxnet3
+                network: VM Network
+                network_type: standard
+            nic2:
+                type: vmxnet3
+                network: dvSwitch Network
+                network_type: dvs
+        vm_hardware:
+            memory_mb: 2048
+            num_cpus: 2
+            osid: centos64Guest
+            scsi: paravirtual
+            vm_cdrom:
+                type: "iso"
+                iso_path: "DatastoreName/cd-image.iso"
+         esxi:
+            datacenter: MyDatacenter
+            hostname: esx001.mydomain.local
+
+
+    

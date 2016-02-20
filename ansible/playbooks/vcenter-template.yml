@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+
+  tasks:
+    - name: Provision a set of instances
+      vsphere_guest:
+        vcenter_hostname: vcenter-east.doche.io
+        username: administrator@vsphere.local
+        password: Tclouds@123
+        guest: mynewvm
+        from_template: yes
+        template_src: doche-mesos-base-template
+        cluster: doche-cluster
+        resource_pool: "/Resources"
